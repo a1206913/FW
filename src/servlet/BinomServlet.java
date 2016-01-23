@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class BinomServlet
@@ -32,21 +31,25 @@ public class BinomServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		HttpSession session = request.getSession();
 		
 		String rechner = request.getParameter("rechner");
 		if (rechner != null && rechner.equalsIgnoreCase("Berechne")) {
 			System.out.println("action: " + rechner);
+			int time = 0;
 			try {
-				int time = 0;
 				if (request.getParameter("T").isEmpty() || request.getParameter("T").contains(" ")) {
 					time = 3;
 				}
-				else 
+				else
 					time = Integer.parseInt(request.getParameter("T"));
-					System.out.println(time);
-					
-				double basisWert = 0;
+			}
+			catch (NumberFormatException ex) {
+				out.println("<h3 style='color:red';>" + "Im 'Time'-Feld is ein Ganzzahl erwartet" + "</h3>");
+				ex.printStackTrace();
+			}
+			
+		try {			
+			double basisWert = 0;
 				if (request.getParameter("basisWert").isEmpty() || request.getParameter("basisWert").contains(" ")) {
 					basisWert = 100;
 				}
@@ -99,6 +102,7 @@ public class BinomServlet extends HttpServlet {
 				
 			}
 			catch (NumberFormatException ex) {
+				out.println("<h3 style='color:red';>" + "Die Werte müssen Zahlen sein und als Dezimaltrennzeichen wird Punkt akzeptiert" + "</h3>");
 				ex.printStackTrace();
 			}
 		}	
