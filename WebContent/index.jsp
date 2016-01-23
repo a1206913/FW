@@ -10,14 +10,14 @@
 	<h2>Binomialverteilung berechnen</h2>
 
 	<form method="post" action="BinomServlet">
-		Time: <input placeholder="3" type="text" name="T"><br>
-		Basiswert: <input placeholder="100" type="text" name="basisWert"><br>
-		Ausübungspreis: <input placeholder="102" type="text" name="strike"><br>
-		Steigfaktor: <input placeholder="1.10" type="text" name="uFactor"><br>
-		Sinkfaktor: <input placeholder="0.95" type="text" name="sFactor"><br>
-		Bruttozins: <input placeholder="1.01" type="text" name="bZins"><br>
+		Time: <input style="margin-left:80px" placeholder="3" type="text" name="T"><br>
+		Basiswert: <input style="margin-left:49px" placeholder="100" type="text" name="basisWert"><br>
+		Ausübungspreis: <input style="margin-left:9px" placeholder="102" type="text" name="strike"><br>
+		Steigfaktor: <input style="margin-left:42px" placeholder="1.10" type="text" name="uFactor"><br>
+		Sinkfaktor: <input style="margin-left:47px" placeholder="0.95" type="text" name="sFactor"><br>
+		Bruttozins: <input style="margin-left:47px" placeholder="1.01" type="text" name="bZins"><br>
 		<br><br>
-		<input type="submit" value="Berechne" name="rechner">
+		<input type="submit" style="background-color: #ffa851; margin-left:155px;" value="Berechne" name="rechner">
 	</form>
 </body>
 </html>

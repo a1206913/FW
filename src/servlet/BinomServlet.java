@@ -82,18 +82,20 @@ public class BinomServlet extends HttpServlet {
 					bZins = Double.parseDouble(request.getParameter("bZins"));
 				
 				Binomial b = new Binomial(time, basisWert, strike, uFactor, sFactor, bZins);
-	//			start the calculation
-//				Binomial.start();
-				b.aktienPreis();
-//				b.callOption();
+
+				if (b.validityCheck().equals("true")) {
+					
+//					start the calculation
+					request.setAttribute("aktienPreis", b.aktienPreis());
+					request.setAttribute("callOption", b.callOption());
+					
+//					response.sendRedirect("/Binom/result.jsp");
+					RequestDispatcher rd = getServletContext().getRequestDispatcher("/result.jsp");
+					rd.include(request, response);
+				}
 				
-				
-				request.setAttribute("aktienPreis", b.aktienPreis());
-				request.setAttribute("callOption", b.callOption());
-				
-//				response.sendRedirect("/Binom/result.jsp");
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/result.jsp");
-				rd.include(request, response);
+				else
+					out.println("<h3 style='color:red';>" + b.validityCheck() + "</h3>");
 				
 			}
 			catch (NumberFormatException ex) {

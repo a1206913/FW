@@ -13,9 +13,8 @@ public class Binomial {
 	double uFactor = 1.10;
 	double sFactor = 0.95;
 	double bZins = 1.01;
+
 	public ArrayList<double[]> arrayList = new ArrayList<double[]>();
-//	public static ArrayList<double[]> arrayList = null;
-//	public static ArrayList<double[]> call = null;
 	public static ArrayList<double[]> call = new ArrayList<double[]>();
 	
 	public Binomial(int time, double basisW, double strike, double uFactor,
@@ -27,8 +26,25 @@ public class Binomial {
 		this.bZins = bZins;
 	}
 	
+	public String validityCheck() {
+		String result = "true";
+		if (this.T <= 0 ) {
+			result = "T muss größer als 0 sein";
+		}
+		else if (this.basisW > this.strike) {
+			result = "Basiswert muss kleiner als Ausübungspreis sein";
+		}
+		else if (this.uFactor < this.sFactor) {
+			result = "Upfaktor muss größer als Downfaktor sein";
+		}
+		else if (this.bZins < this.sFactor || this.bZins > this.uFactor)
+			result = "Basiszins muss größer als Downfaktor und kleiner als Upfaktor sein";
+		
+		return result;
+	}
+	
 	public ArrayList<double[]> aktienPreis() {
-//		arrayList = new ArrayList<double[]>();
+
 		for (int k = 1; this.n < this.T; k++) {
 			double[] arr1 = new double[k + 1];
 			if (k == 1) {
@@ -60,16 +76,13 @@ public class Binomial {
 	public ArrayList<double[]> callOption() {
 		int count = 0;
 		call = new ArrayList<double[]>();
-		/*if (arrayList.size() == 0 || arrayList.size() != T) {
-			aktienPreis();
-		}*/
+
 		for (int k = n; k >= 0; k--) {
 			double[] arr1 = new double[k + 1];
 		
 			if (k == n) {
 				int p = k;
 				
-//				System.out.println("arrayList.size()" + arrayList.size()); 
 				System.out.println("in the callOption() -- (k)" + (k));
 				System.out.println("in the callOption() -- (p-1)" + (p-1));
 				
@@ -114,27 +127,6 @@ public class Binomial {
 		}
 		return result;
 	}
-	
-	/*public static void start() {
-		System.out.println("in the start() method");
-//		aktienPreis();
-		for (int y = 0; y < arrayList.size(); y++) {
-			double[] arr = arrayList.get(y);
-			for (int i = 0; i < arr.length; i++) {
-				System.out.print(df.format(+arr[i]) + " | ");
-			}
-			System.out.println(" ");
-		}
-		
-		callOption();
-		for (int y = 0; y < call.size(); y++) {
-			double[] arr = call.get(y);
-			System.out.println(" ");
-			for (int i = 0; i < arr.length; i++) {
-				System.out.print(df.format(+arr[i]) + " | ");
-			}
-		}
-	}*/
 	
 	/*public static void main(String[] args) {
 //		aktienPreis();
