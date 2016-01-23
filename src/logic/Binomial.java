@@ -21,6 +21,7 @@ public class Binomial {
 			double sFactor, double bZins) {
 		this.T = time;
 		this.basisW = basisW;
+		this.strike = strike;
 		this.uFactor = uFactor;
 		this.sFactor = sFactor;
 		this.bZins = bZins;
@@ -28,6 +29,8 @@ public class Binomial {
 	
 	public String validityCheck() {
 		String result = "true";
+		System.out.println("basisWer: " + this.basisW);
+		System.out.println("strike: " + this.strike);
 		
 		if ((T < 0) || (basisW < 0) || (uFactor < 0) || (sFactor < 0) || (bZins < 0)) {
 			result = "Negative Zahlen sind nicht erlaubt!";

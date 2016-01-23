@@ -58,24 +58,27 @@ public class BinomServlet extends HttpServlet {
 				
 				double strike = 0;
 				if (request.getParameter("strike").isEmpty() || request.getParameter("strike").contains(" ")) {
+					System.out.println("request.getParameter(strike): " + request.getParameter("strike"));
 					strike = 102;
 				}
-				else
+				else {
+					System.out.println("in the else: request.getParameter(strike): " + request.getParameter("strike"));
 					strike = Double.parseDouble(request.getParameter("strike"));
+				}	
 				
 				double uFactor = 0;
 				if (request.getParameter("uFactor").isEmpty() || request.getParameter("uFactor").contains(" ")) {
 					uFactor = 1.10;
 				}
 				else
-					strike = Double.parseDouble(request.getParameter("uFactor"));
+					uFactor = Double.parseDouble(request.getParameter("uFactor"));
 					
 				double sFactor = 0;
 				if (request.getParameter("sFactor").isEmpty() || request.getParameter("sFactor").contains(" ")) {
 					sFactor = 0.95;
 				}
 				else
-					strike = Double.parseDouble(request.getParameter("sFactor"));
+					sFactor = Double.parseDouble(request.getParameter("sFactor"));
 				
 				double bZins = 0;
 				if (request.getParameter("bZins").isEmpty() || request.getParameter("bZins").contains(" ")) {
