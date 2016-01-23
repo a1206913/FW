@@ -28,7 +28,11 @@ public class Binomial {
 	
 	public String validityCheck() {
 		String result = "true";
-		if (this.T <= 0 ) {
+		
+		if ((T < 0) || (basisW < 0) || (uFactor < 0) || (sFactor < 0) || (bZins < 0)) {
+			result = "Negative Zahlen sind nicht erlaubt!";
+		}
+		else if (this.T <= 0 ) {
 			result = "T muss größer als 0 sein";
 		}
 		else if (this.basisW > this.strike) {
