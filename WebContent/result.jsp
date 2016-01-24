@@ -14,7 +14,7 @@
 </head>
 <body>
 	<h1>Das Ergebnis der Berechnung:</h1>
-
+	<h2>Aktienkurs auf Zeitintervalle (t0, t1, t2, ..)</h2>
 
 	<table border="1">
 
@@ -48,7 +48,7 @@
 	</form>
 	
 	<br><br>
-	<h2>Die Call Option</h2>
+	<h2>Die Werte des Calls</h2>
 	
 	<table border="1">
 
