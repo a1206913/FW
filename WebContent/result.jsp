@@ -24,7 +24,7 @@
 			for (int j = 0; j < arrayList.size(); j++) {
 		%>
 		<tr>
-			<td width="20" style="background-color:#9dceff;">T:<%=j+1%></td>
+			<td width="20" style="background-color:#9dceff;">T:<%=j%></td>
 			<%
 				double[] arr = arrayList.get(j);
 					for (int i = 0; i < arr.length; i++) {
@@ -53,10 +53,10 @@
 	<table border="1">
 
 		<%
-			ArrayList <double[]> call = (ArrayList <double[]>) request.getAttribute("callOption");
+			ArrayList<double[]> call = (ArrayList <double[]>) request.getAttribute("callOption");
 			String oneCall = null;
-			int last = Binomial.call.size();
-			for (int y = 0; y < Binomial.call.size()-1; y++) {
+			int last = call.size();
+			for (int y = 0; y < call.size(); y++) {
 		%>
 		<tr>
 			<td width="20" style="background-color:#c0c0c0;">T:<%=(last-1)-y%></td>
@@ -68,7 +68,7 @@
 			%>
 			<td width="60" style="background-color:#d7d7d7;"><%=oneCall%></td>
 			<%
-				}
+					}
 			%>
 
 		</tr>
@@ -77,8 +77,6 @@
 			}
 		%>
 	</table>
-
-
 
 </body>
 </html>

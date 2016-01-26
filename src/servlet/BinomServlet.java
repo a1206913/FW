@@ -4,6 +4,7 @@ import logic.Binomial;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -73,31 +74,36 @@ public class BinomServlet extends HttpServlet {
 				else
 					uFactor = Double.parseDouble(request.getParameter("uFactor"));
 					
-				double sFactor = 0;
-				if (request.getParameter("sFactor").isEmpty() || request.getParameter("sFactor").contains(" ")) {
-					sFactor = 0.95;
+				double dFactor = 0;
+				if (request.getParameter("dFactor").isEmpty() || request.getParameter("dFactor").contains(" ")) {
+					dFactor = 0.95;
 				}
 				else
-					sFactor = Double.parseDouble(request.getParameter("sFactor"));
+					dFactor = Double.parseDouble(request.getParameter("dFactor"));
 				
 				double bZins = 0;
 				if (request.getParameter("bZins").isEmpty() || request.getParameter("bZins").contains(" ")) {
 					bZins = 0.95;
 				}
-				else
+				else {
 					bZins = Double.parseDouble(request.getParameter("bZins"));
-				
-				Binomial b = new Binomial(time, basisWert, strike, uFactor, sFactor, bZins);
+				}
+				 
+				Binomial b = new Binomial(time, basisWert, strike, uFactor, dFactor, bZins);
 
 				if (b.validityCheck().equals("true")) {
 					
 //					start the calculation
-					request.setAttribute("aktienPreis", b.aktienPreis());
-					request.setAttribute("callOption", b.callOption());
+					ArrayList<double[]> aktienList = b.aktienPreis();
+					ArrayList<double[]> call = b.callOption(aktienList);
+					request.setAttribute("aktienPreis", aktienList);
+					request.setAttribute("callOption", call);
+					
+//					System.out.println("from the servlet: " + b.toString());
 					
 //					response.sendRedirect("/Binom/result.jsp");
 					RequestDispatcher rd = getServletContext().getRequestDispatcher("/result.jsp");
-					rd.include(request, response);
+					rd.forward(request, response);
 				}
 				
 				else
